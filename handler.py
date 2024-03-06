@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import dispatcher
 from aiogram.dispatcher import FSMContext
 from utils import start_text, order_text, finish_text, db_text, prices_text, garant_text, marki_text, coop_text, \
-    himath_text, algorithms_text, terver_text, python_text
+    himath_text, algorithms_text, terver_text, python_text, answers_text
 from functions import generate_unique_order_number
 
 CHAT_ID = -1002103501318
@@ -65,7 +65,8 @@ def start_pip(dp: dispatcher):
                 state_data['subject'] = 'Python'
                 await state.update_data(**state_data)
             case "QA":
-                await callback.message.edit_text(text='Заглушка по ответам', reply_markup=qa_kb)
+                await callback.message.edit_text(text=answers_text, reply_markup=qa_kb)
+                await UserStates.qa_state.set()
 
 
     @dp.callback_query_handler(state=UserStates.qa_state)
